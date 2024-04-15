@@ -41,11 +41,12 @@
         </style>
     </head>
 <body>
+    <div class="title">THURSDAY MORNING RELAXATION </div>
 <div class="Controls">
     <button  class="control" onclick="control()">See Controls</button>
 </div>
-<div class="">
-    <button class="play" onclick="play()">Play</button>
+<div class="play">
+   Press "ENTER" To play
 </div>
 
 <script>
@@ -58,15 +59,26 @@
         createCanvas(w,h)
         //Assign variable with a value
         bg = loadImage("dungeon.webp")}
+        let play_Game = new  play()
     function draw(){
         //loop background
         background(bg)
     }
     function play(){
-        window.location.href="Lv1.html"
+    this.update = function(){
+        if(keyIsDown(13)){
+            window.location.href="Lv1.html"
+        }
+
+        
     }
+}
     function control(){
-        window.location.href="fighting.html"
+        window.location.href="prototype.html"
+    }
+
+    function draw(){
+        play_Game.update()
     }
     </script>
 </body>
