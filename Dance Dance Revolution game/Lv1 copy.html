@@ -44,6 +44,7 @@ body{
         let r_collide = 0
         let d_collide = 0
         let u_collide = 0
+        let l_u_collide = 0
         //miss tracks the miss
         let miss = 0
         //images for each arrow
@@ -62,6 +63,7 @@ body{
         let hit_5 = false
         //boundaries
         let left_bounds = false
+        let long_left_middle_bounds = false
         //width and height
         let w = window.innerWidth
         let h = window.innerHeight
@@ -70,6 +72,7 @@ body{
         let left_middle
         let right_middle
         let right
+       
         //names of the long arrows
          //declare an unknown variable
        //pre loading the images so they load first
@@ -317,9 +320,9 @@ body{
             this.show = function(){
                 //here is where we determine what it will look like
                 fill(255,0,0)
-                image(u_arrow,this.x,this.y,150,150)
+                // image(u_arrow,this.x,this.y,150,150)
                 fill(255,0,0)
-                image(u_arrow_long,this.x+34,this.y+120,75,350)
+                rect(this.x+34,this.y,75,350)
                 fill("brown")
                 image(u_arrow,w/1.8,20,150,150)
                 fill("black")
@@ -338,15 +341,55 @@ body{
                 document.getElementById('misses').innerHTML = miss
 
                 hit_4 = collideRectRect(w/1.8,20,150,150,this.x,this.y,150,150)
+                hit_5 = collideRectRect(w/1.8,20,150,250,this.x+34,this.y,75,350)
                 left_middle_bounds = collideRectRect(-10,-300,w,10,this.x,this.y,150,150)
+                long_left_middle_bounds = collideRectRect(-10,-300,w,10,this.x+34,this.y,75,350)
        
+                if(hit_5 === true && keyIsDown(38) && u_collide === 0){
+                    if (miss >=5){
+                        score+= 3
+                        
+                    }    
+                    else if(miss <5){
+                        score += 1
+                    }
+                    l_u_collide = 1
+               
+                }
+                //If you press before or after the collision you lose points
+                else if(hit_5 === false && keyIsDown(38) && u_collide === 0){
+                    score -= 5
+                    l_u_collide = 1
+                }
+                //makes sure that if nothing is true no score will be given
+                else if(hit_5 === false && !keyIsDown(38) && u_collide !==0){
+                    l_u_collide = 0
+                }
+                //makes you lose if score = -10
+                if (score <= -10){
+                    window.location.href = "lose_screen.html"
+             
+                }
+                // if the two objects collide and you do not press the button you gain a miss
+                else if (long_left_middle_bounds === true){
+                    //every miss makes the object faster
+                    miss += 1
+                    this.gravity += .01
+                    if (miss <=9){
+                        this.y = random(300,1000)
+                    }
+                    else if (miss = 10){
+                        window.location.href= "lose_screen.html"
+                    }
+                }
+                
                 if(hit_4 === true && keyIsDown(38) && u_collide === 0){
                     if (miss >=5){
                         score+= 3
                         
                     }    
                     else if(miss <5){
-                        score += 3
+                        score + 1
                     }
                     u_collide = 1
                
@@ -377,7 +420,6 @@ body{
                         window.location.href= "lose_screen.html"
                     }
                 }
-                
 
             }      
            
@@ -387,14 +429,14 @@ body{
         function draw(){
             // preload()
             clear()
-            right.show()
-            right.update()
-            left.show()
-            left.update()
+            // right.show()
+            // right.update()
+            // left.show()
+            // left.update()
             up.show()
             up.update()
-            down.show()
-            down.update()
+            // down.show()
+            // down.update()
            
         }
     </script>
