@@ -38,6 +38,7 @@ body{
         //random starting point for the "arrows"
         // let r = random(500,1000)
         //score 
+        let tru = 5
         let score = 0
         //makes collisions run once
         let collide = 0
@@ -64,6 +65,7 @@ body{
         let right_middle
         let right //declare an unknown variable
        //pre loading the images so they load first
+       if (tru = 2){
         function preload(){
             r_arrow = loadImage("arrows/right_arrow.png")
             l_arrow = loadImage("arrows/left_arrow.png")
@@ -252,7 +254,7 @@ body{
                 hit_3 = collideRectRect(w/2.5,20,150,150,this.x,this.y,150,150)
                 left_middle_bounds = collideRectRect(-10,-300,w,10,this.x,this.y,150,150)
        
-                if(hit_3 === true && keyIsDown(40) && d_collide === 0){
+                if(hit_3 === true && keyIsDown((40)) && d_collide === 0){
                     if (miss >=5){
                         score+= 3
                     }    
@@ -370,8 +372,13 @@ body{
             }      
            
         }
-
-
+ 
+        function win(){
+            if(score = 25){
+                window.loction.href = "Lv2.html"
+            }
+        }
+    
         function draw(){
             // preload()
             clear()
@@ -385,6 +392,7 @@ body{
             down.update()
             
         }
+    }
     </script>
 <body>
  <h2 id="score">Score <span id="number"></span></h2>
