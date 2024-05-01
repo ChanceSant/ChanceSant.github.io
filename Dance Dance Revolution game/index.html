@@ -59,7 +59,7 @@ font-size: 22px;
 <body>
     <div class="story_text_box" id="text">
         <span class="storytext" id="text">YOU EXPLORED INTO AN ARCADE THAT ONLY HAS ONE GAME !!! 
-            <br><span class="subtext">(theyre going out of business)</span><br> BUT LUCKILY THIS GAME IS ONE OF YOUR FAVORITES<br>(use arrow keys or WASD to move)</span>
+            <br><span class="subtext">(theyre going out of business)</span><br> BUT LUCKILY THIS GAME IS ONE OF YOUR FAVORITES<br>(use arrow keys or WASD to move)<br>(walk to the arcade to start)</span>
         <button class="close" id="close" onclick = "hide()"> X </button>
       </div>
     <script>
@@ -104,7 +104,7 @@ function hide() {
             this.show = function(){
                 //here is where we determine what it will look like
                 fill(255,0,0)
-                circle(this.x,this.y,150)
+                circle(this.x,this.y,50)
                 fill("brown")
                 image(arcade,60,500,150,150)
                 fill("orange")

@@ -68,13 +68,14 @@
 
 
 <script>
+    let song_playing = 0
     let h = window.innerHeight
     let w = window.innerWidth
     //declare variable with no value so it is global
 
     function preload(){
          bg = loadImage("relax.webp")
-         calm = loadSound("sounds/calm.mp3")
+         song = loadSound("sounds/calm.mp3")
     }
     function setup(){
         createCanvas(w,h)
@@ -87,10 +88,12 @@
         if(keyIsDown(13)){
             window.location.href="Lv1.html"
         }
-        else if (keyIsDown(70)) {
-            calm.play()
-            calm.loop()
-  }
+        if(keyIsPressed === true){
+                    song_playing +=1
+                    }
+                if(song_playing === 1){
+                song.play()
+                 }
         
        
     }
