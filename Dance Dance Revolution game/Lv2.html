@@ -127,7 +127,7 @@ body{
                 right_bounds = collideRectRect(-10,-300,w,10,this.x,this.y,150,150)
        
                 if(hit_1 === true && keyIsDown(68) && r_collide === 0){
-                this.gravity += .05
+                this.gravity += .02
                 score += 1
                 r_collide = 1
                  this.y = random(700,1400)
@@ -206,7 +206,7 @@ body{
        
                 
                  if(hit_2 === true && keyIsDown(65) && collide === 0){
-                this.gravity += .05
+                this.gravity += .02
                 score += 1
                 collide = 1
                 this.y = random(300,1000)
@@ -272,7 +272,7 @@ body{
                 left_middle_bounds = collideRectRect(-10,-300,w,10,this.x,this.y,150,150)
        
                 if(hit_3 === true && keyIsDown(83) && d_collide === 0){
-                this.gravity += .05
+                this.gravity += .02
                 score += 1
                 d_collide = 1
                  this.y = random(700,1400)
@@ -343,7 +343,7 @@ body{
                 left_middle_bounds = collideRectRect(-10,-300,w,10,this.x,this.y,150,150)
                 
                 if(hit_4 === true && keyIsDown(87) && u_collide === 0){  
-                this.gravity += .05
+                this.gravity += .02
                 score += 1
                 u_collide = 1
                 this.y = random(700,1400)
