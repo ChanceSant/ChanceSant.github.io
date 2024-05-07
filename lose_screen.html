@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js" integrity="sha512-uaz5GpnQoE6t5echKlX8P52czvsIGgLPcvlzfvRubLZ1Hp8JemUDnbUiAahbVtPb+jUVrNETuXvAhDDF/N3M4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/addons/p5.sound.js" integrity="sha512-TU9AWtV5uUZPX8dbBAH8NQF1tSdigPRRT82vllAQ1Ke28puiqLA6ZVKxtUGlgrH6yWFnkKy+sE6luNEGH9ar0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <title>Document</title>
     <style>
         body{
@@ -21,9 +23,7 @@
             background-color:transparent;
             border:none;
         }
-        .restart:hover{
-            text-shadow: 10px 10px 0px black
-        }
+        
         .quit{
             position:absolute;
             left: 60%;
@@ -31,34 +31,53 @@
             color:lime; 
             font-size: 80px;
             background-color:transparent;
+            border: none;
+        }
+        .quit:hover{
+            text-shadow: 10px 10px 0px black
+        }
+        .restart:hover{
+            text-shadow: 10px 10px 0px black
         }
     </style>
 </head>
 <body>
     <div>
-    <button onclick = "restart()" class="restart">Restart</button>
-    <button onclick = "quit()"class="quit">Quit</button>
+    <button onmouseover = 'play_sound()' onclick = "restart()" class="restart">Restart</button>
+    <button onmouseover = 'play_sound()' onclick = "quit()"class="quit">Quit</button>
     </div>
     <script>
+
+        function preload(){
+            ui = loadSound("sounds/ui.mp3")
+            bg = loadImage('https://imgs.search.brave.com/OZI0ZGKBIUoQAQcgVaq6OFrQEv-w8J26Tni5e8adtfc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/Z2FtZXNkYXRhYmFz/ZS5vcmcvTWVkaWEv/U1lTVEVNL0FyY2Fk/ZS9HYW1lT3Zlci9U/aHVtYi9UaHVtYl9E/YW5jZV9EYW5jZV9S/ZXZvbHV0aW9uXy1f/MTk5OV8tX0tvbmFt/aS5qcGc')    }
+   
+        
     let h = window.innerHeight
     let w = window.innerWidth
     //declare variable with no value so it is global
     let bg 
-
+    
+    function play_sound(){
+        ui.play()
+    }
     function setup(){
         createCanvas(w,h)
+    }
         //Assign variable with a value
-        bg = loadImage('https://imgs.search.brave.com/OZI0ZGKBIUoQAQcgVaq6OFrQEv-w8J26Tni5e8adtfc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly93d3cu/Z2FtZXNkYXRhYmFz/ZS5vcmcvTWVkaWEv/U1lTVEVNL0FyY2Fk/ZS9HYW1lT3Zlci9U/aHVtYi9UaHVtYl9E/YW5jZV9EYW5jZV9S/ZXZvbHV0aW9uXy1f/MTk5OV8tX0tvbmFt/aS5qcGc')    }
-    function draw(){
+         function draw(){
         
         //loop background
         background(bg)
     }
 
     function restart(){
-        window.location.href = 'Lv1.html'
+        window.location.href = 'title.html'
     }
         
+    function quit(){
+      window.location.href = 'index.html'
+    }
     </script>
 </body>
 </html>

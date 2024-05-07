@@ -35,10 +35,10 @@ body{
 </style>
 </head>
     <script>
-        let secs = 0
-        let counterStart = true
-        let song_playing = 0
+        //random starting point for the "arrows"
+        // let r = random(500,1000)
         //score 
+        let song_playing = 0
         let score = 0
         //makes collisions run once
         let collide = 0
@@ -52,35 +52,43 @@ body{
         let l_arrow 
         let d_arrow 
         let u_arrow 
+        //images for each long arrow
+
         //each collision
         let hit_1 = false
         let hit_2 = false
         let hit_3 = false
         let hit_4 = false
+        //boundaries
         let left_bounds = false
+    
+        //width and height
         let w = window.innerWidth
         let h = window.innerHeight
+        //names of the variables
         let left
         let left_middle
         let right_middle
-        let right //declare an unknown variable
+        let right
+       
+        //names of the long arrows
+         //declare an unknown variable
        //pre loading the images so they load first
         function preload(){
             r_arrow = loadImage("arrows/right_arrow.png")
             l_arrow = loadImage("arrows/left_arrow.png")
             d_arrow = loadImage("arrows/down_arrow.png")
             u_arrow = loadImage("arrows/up_arrow.png")
-            song = loadSound("sounds/butterfly.mp3")
+            song = loadSound("sounds/fast_music.mp3")
                 
         }
-        
         function setup(){
             createCanvas(w,h)
              left = new left_box()            
              right = new right_box()//define jumper as new object
              down = new left_middle_box()
              up = new right_middle_box()
-        }
+          }
         //new player object all the details for the right box
         function right_box(){
             //I will make a box that starts at the top of the screen 
@@ -89,7 +97,7 @@ body{
              this.x = w/1.5
              this.y = 1500
 
-            this.gravity = 1
+            this.gravity = .9 
             //velocity
             this.velocity = 0
 
@@ -104,13 +112,7 @@ body{
                 rect(-10,-300,w,10)
             }
             //function to loop on repeat within draw function
-            this.update = function(){if(counterStart === true){
-        secs++
-    }
-    if(secs === 2000){
-        window.location.href = "level_up.html"
-    }
-            
+            this.update = function(){
                  //add velocity to gravity
                  this.velocity -= this.gravity
                 //what direction am I traveling 
@@ -125,13 +127,14 @@ body{
                 right_bounds = collideRectRect(-10,-300,w,10,this.x,this.y,150,150)
        
                 if(hit_1 === true && keyIsDown(68) && r_collide === 0){
+                this.gravity += .005
                 score += 1
                 r_collide = 1
                  this.y = random(700,1400)
 
                 }
                 else if(hit_1 === false && keyIsDown(68) && r_collide === 0){
-                    score -= 1
+                    score -= 2
                     r_collide = 1
                 }
                 else if(hit_1 === false && !keyIsDown(68) && r_collide !==0){
@@ -143,17 +146,12 @@ body{
                     window.location.href = "lose_screen.html"
              
                 }
-                else if(score === 500){
-                window.location.href = "level_up.html"
-           }
-
-            
                 else if (right_bounds === true){
                     miss += 1
                     if (miss <=9){
                         this.y = random(300,1000)
                     }
-                    else if (miss = 10){
+                    else if (miss = 20){
                         window.location.href= "lose_screen.html"
                     }
                 }
@@ -170,7 +168,7 @@ body{
              this.x = w/3.6
              this.y = 750
 
-            this.gravity = 1
+            this.gravity = .9 
             //velocity
             this.velocity = 0
 
@@ -185,13 +183,13 @@ body{
             }
             //function to loop on repeat within draw function
             this.update = function(){
-                 if(keyIsPressed === true){
+                if(keyIsPressed === true){
                     song_playing +=1
                     }
                 if(song_playing === 1){
                 song.play()
+                song.loop()
                  }
-            
                  //add velocity to gravity
                  this.velocity -= this.gravity
                 //what direction am I traveling 
@@ -208,13 +206,13 @@ body{
        
                 
                  if(hit_2 === true && keyIsDown(65) && collide === 0){
+                this.gravity += .005
                 score += 1
                 collide = 1
-                song_playing += 1
-                this.y = random(500,1000)
+                this.y = random(300,2000)
                 }
                 else if(hit_2 === false && keyIsDown(65) && collide === 0){
-                    score -= 1
+                    score -= 2
                     collide = 1
                 }
                 else if(hit_2 === false && !keyIsDown(65) && collide !==0){
@@ -222,7 +220,6 @@ body{
                 }
                 else if (left_bounds === true){
                     miss += 1
-                    this.gravity += .01
                     if (miss <=9){
                         this.y = random(300,1000)
                     }
@@ -234,9 +231,6 @@ body{
                     window.location.href = "lose_screen.html"
              
                 }
-                else if(score === 500){
-                window.location.href = "level_up.html"
-           }
 
             }      
         }
@@ -247,7 +241,7 @@ body{
              this.x = w/2.5
              this.y = 1750
 
-            this.gravity = 1
+            this.gravity = .9 
             //velocity
             this.velocity = 0
 
@@ -278,18 +272,14 @@ body{
                 left_middle_bounds = collideRectRect(-10,-300,w,10,this.x,this.y,150,150)
        
                 if(hit_3 === true && keyIsDown(83) && d_collide === 0){
-                    if (miss >=5){
-                        score+= 3
-                    }    
-                    else if(miss <5){
-                        score += 1
-                    }
+                this.gravity += .005
+                score += 1
                 d_collide = 1
                  this.y = random(700,1400)
 
                 }
                 else if(hit_3 === false && keyIsDown(83) && d_collide === 0){
-                    score -= 1
+                    score -= 2
                     d_collide = 1
                 }
                 else if(hit_3 === false && !keyIsDown(83) && d_collide !==0){
@@ -301,12 +291,8 @@ body{
                     window.location.href = "lose_screen.html"
              
                 }
-                else if(score === 500){
-                window.location.href = "level_up.html"
-            }
                 else if (left_middle_bounds === true){
                     miss += 1
-                    this.gravity +=.02
                     if (miss <=9){
                         this.y = random(300,1000)
                     }
@@ -320,13 +306,13 @@ body{
            
         }
         function right_middle_box(){
-            //I will make a box that starts at the top of the screen 
+
             let r = random(500,1000)
             //start position of our box
              this.x = w/1.8
              this.y = 2000
 
-            this.gravity = 1
+            this.gravity = .9 
             //velocity
             this.velocity = 0
 
@@ -344,7 +330,7 @@ body{
             //function to loop on repeat within draw function
             this.update = function(){
                  //add velocity to gravity
-                 this.velocity -= this.gravity
+                 this.velocity -= this.gravity 
                 //what direction am I traveling 
                 this.y += this.velocity
                 //resistence to falling
@@ -355,21 +341,16 @@ body{
 
                 hit_4 = collideRectRect(w/1.8,20,150,150,this.x,this.y,150,150)
                 left_middle_bounds = collideRectRect(-10,-300,w,10,this.x,this.y,150,150)
-       
-                if(hit_4 === true && keyIsDown(87) && u_collide === 0){
-                    if (miss >=5){
-                        score+= 3
-                    }    
-                    else if(miss <5){
-                        score += 1
-                    }
+                
+                if(hit_4 === true && keyIsDown(87) && u_collide === 0){  
+                this.gravity += .005
+                score += 1
                 u_collide = 1
-                 this.y = random(700,1400)
-
+                this.y = random(700,1400)
                 }
                 //If you press before or after the collision you lose points
                 else if(hit_4 === false && keyIsDown(87) && u_collide === 0){
-                    score -= 1
+                    score -= 2
                     u_collide = 1
                 }
                 //makes sure that if nothing is true no score will be given
@@ -379,29 +360,24 @@ body{
                 //makes you lose if score = -10
                 if (score <= -10){
                     window.location.href = "lose_screen.html"
+             
                 }
-                else if(score === 500){
-                window.location.href = "level_up.html"
-            }
                 // if the two objects collide and you do not press the button you gain a miss
                 else if (left_middle_bounds === true){
                     //every miss makes the object faster
                     miss += 1
-                    this.gravity += .01
                     if (miss <=9){
                         this.y = random(300,1000)
                     }
                     else if (miss = 10){
                         window.location.href= "lose_screen.html"
                     }
-
                 }
-                
 
             }      
            
         }
- 
+
 
         function draw(){
             // preload()
@@ -414,7 +390,7 @@ body{
             up.update()
             down.show()
             down.update()
-            
+           
         }
     </script>
 <body>
